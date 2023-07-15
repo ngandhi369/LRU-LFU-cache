@@ -15,7 +15,8 @@ This program demonstrates the visualization of an LRU (Least Recently Used) LFU 
 
 ## Program Explanation
 - The program uses the SFML library to create a graphical window for cache visualization.
-- The cache is implemented using a doubly linked list, where each node represents a key-value pair.
+- All operations here are being done using queue algorithm techniques.
+- For the sake of ease of use, the queue is implemented using a doubly linked list, where each node represents a key-value pair.
 - The `LinkedList` class contains methods to add a node, remove a node, find a key, and draw the linked list on the SFML window.
 - The main function sets up the SFML window and starts a separate input thread to interact with the cache.
 - The cache visualization is updated in the main loop of the program using the SFML window.
