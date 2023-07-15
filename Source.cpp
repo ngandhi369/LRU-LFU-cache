@@ -37,7 +37,7 @@ public:
     }
 
     int traverseLastNode() {
- 
+
         Node* current = head;
 
         while (current->next != nullptr) {
@@ -97,12 +97,9 @@ public:
         nodeRect5.setPosition(167, 50);
         sf::Text text1("LRU cache Visualization", font, 30);
 
-        //text1.setString("LRU cache Visualization");
         text1.setPosition(nodeRect5.getPosition().x + 650 / 2 - text1.getLocalBounds().width / 2, nodeRect5.getPosition().y + 75 / 2 - text1.getLocalBounds().height / 2);
-        //text1.setFillColor(sf::Color::Yellow);
 
         text1.setFillColor(sf::Color::Yellow);
-        //text1.setPosition(320, 230);
 
         window.draw(nodeRect5);
         window.draw(text1);
@@ -132,7 +129,6 @@ public:
             window.draw(text);
 
 
-            // to draw value for particular key
             sf::RectangleShape nodeRect4(sf::Vector2f(nodeSize, nodeSize));
             nodeRect4.setFillColor(sf::Color::Transparent);
             nodeRect4.setPosition(index * (nodeSize + nodeSpacing) + nodeSpacing, startY+150);
@@ -160,64 +156,7 @@ public:
         window.draw(text);
     }
 
-    // Add getters/setters or additional methods as needed
 };
-
-/*class Button {
-private:
-    sf::RectangleShape shape;
-    sf::Text text;
-    sf::Font font;
-    sf::Color idleColor;
-    sf::Color hoverColor;
-    sf::Color activeColor;
-
-public:
-    Button(float x, float y, float width, float height,
-        std::string buttonText, int textSize,
-        sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor)
-        : idleColor(idleColor), hoverColor(hoverColor), activeColor(activeColor) {
-
-        if (!font.loadFromFile("arial.ttf")) {
-            std::cerr << "Failed to load font." << std::endl;
-        }
-
-        shape.setPosition(sf::Vector2f(x, y));
-        shape.setSize(sf::Vector2f(width, height));
-        shape.setFillColor(idleColor);
-
-        text.setFont(font);
-        text.setString(buttonText);
-        text.setCharacterSize(textSize);
-        text.setFillColor(sf::Color::White);
-        text.setPosition(
-            shape.getPosition().x + shape.getGlobalBounds().width / 2 - text.getGlobalBounds().width / 2,
-            shape.getPosition().y + shape.getGlobalBounds().height / 2 - text.getGlobalBounds().height / 2
-        );
-    }
-
-    bool isMouseOver(sf::RenderWindow& window) {
-        sf::IntRect rect(shape.getPosition().x, shape.getPosition().y, shape.getSize().x, shape.getSize().y);
-        if (rect.contains(sf::Mouse::getPosition(window))) {
-            return true;
-        }
-        return false;
-    }
-
-    void update(sf::RenderWindow& window) {
-        if (isMouseOver(window)) {
-            shape.setFillColor(hoverColor);
-        }
-        else {
-            shape.setFillColor(idleColor);
-        }
-    }
-
-    void render(sf::RenderWindow& window) {
-        window.draw(shape);
-        window.draw(text);
-    }
-};*/
 
 void inputThreadFunc(LinkedList& linkedList, int& curr_size)
 {
@@ -227,8 +166,6 @@ void inputThreadFunc(LinkedList& linkedList, int& curr_size)
         std::cout << "Enter a choice ('q' to quit): 1. Put   2. get" << std::endl;
         int ch;
         std::cin >> ch;
-
-        //std::cout << "Size :" << curr_size << std::endl;
 
         switch (ch)
         {
@@ -286,9 +223,6 @@ int main()
 
     LinkedList linkedList(window);
 
-    //Button putButton(50, 50, 100, 50, "Put", 24, sf::Color::Green, sf::Color::Cyan, sf::Color::Magenta);
-    //Button getButton(250, 50, 100, 50, "Get", 24, sf::Color::Red, sf::Color::Yellow, sf::Color::Blue);
-
     std::thread inputThread(inputThreadFunc, std::ref(linkedList), std::ref(curr_size));
 
     while (window.isOpen())
@@ -298,30 +232,10 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-
-            //putButton.update(window);
-            //getButton.update(window);
-
-            /*if (event.type == sf::Event::MouseButtonPressed)
-            {
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-                    if (putButton.isMouseOver(window))
-                    {
-                        // Process Put button click if needed
-                    }
-                    else if (getButton.isMouseOver(window))
-                    {
-                        // Process Get button click if needed
-                    }
-                }
-            }*/
         }
 
         window.clear();
         linkedList.drawLinkedList();
-        //putButton.render(window);
-        //getButton.render(window);
         window.display();
     }
 
