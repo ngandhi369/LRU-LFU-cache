@@ -41,7 +41,7 @@ public:
         Node* current = head;
 
         while (current->next != nullptr) {
-            std::cout << "value:" << current->value << std::endl;
+            //std::cout << "value:" << current->value << std::endl;
             current = current->next;
         }
         return (current->value);
@@ -98,7 +98,6 @@ public:
         sf::Text text1("LRU cache Visualization", font, 30);
 
         text1.setPosition(nodeRect5.getPosition().x + 650 / 2 - text1.getLocalBounds().width / 2, nodeRect5.getPosition().y + 75 / 2 - text1.getLocalBounds().height / 2);
-
         text1.setFillColor(sf::Color::Yellow);
 
         window.draw(nodeRect5);
@@ -110,6 +109,14 @@ public:
 
         text.setString("Head");
         text.setPosition(nodeRect.getPosition().x + nodeSize / 2 - text.getLocalBounds().width / 2, nodeRect.getPosition().y + nodeSize / 2 - text.getLocalBounds().height / 2);
+
+        sf::Text text5;
+        text5.setFont(font);
+        text5.setString("Value:");
+        text5.setPosition(36, 371);
+        text5.setFillColor(sf::Color::Cyan);
+        text5.setCharacterSize(22);
+        window.draw(text5);
 
         window.draw(nodeRect);
         window.draw(text);
@@ -125,20 +132,27 @@ public:
             text.setPosition(nodeRect3.getPosition().x + nodeSize / 2 - text.getLocalBounds().width / 2,
                 nodeRect3.getPosition().y + nodeSize / 2 - text.getLocalBounds().height / 2);
 
+            sf::Text text7, text8;
+            text7.setString(std::to_string(current->key));
+            text7.setFillColor(sf::Color::White);
+            text7.setFont(font);
+            text7.setPosition(nodeRect3.getPosition().x + nodeSize / 2 - text7.getLocalBounds().width / 2, nodeRect3.getPosition().y + nodeSize / 2 - text7.getLocalBounds().height / 2);
+
             window.draw(nodeRect3);
-            window.draw(text);
+            window.draw(text7);
 
 
             sf::RectangleShape nodeRect4(sf::Vector2f(nodeSize, nodeSize));
-            nodeRect4.setFillColor(sf::Color::Transparent);
-            nodeRect4.setPosition(index * (nodeSize + nodeSpacing) + nodeSpacing, startY+150);
+            nodeRect4.setFillColor(sf::Color::White);
+            nodeRect4.setPosition(index * (nodeSize + nodeSpacing) + nodeSpacing, startY + 130);
 
-            text.setString(std::to_string(current->value));
-            text.setPosition(nodeRect4.getPosition().x + nodeSize / 2 - text.getLocalBounds().width / 2,
-                nodeRect4.getPosition().y + nodeSize / 2 - text.getLocalBounds().height / 2);
+            text8.setString(std::to_string(current->value));
+            text8.setFillColor(sf::Color::Black);
+            text8.setFont(font);
+            text8.setPosition(nodeRect4.getPosition().x + nodeSize / 2 - text8.getLocalBounds().width / 2, nodeRect4.getPosition().y + nodeSize / 2 - text8.getLocalBounds().height / 2);
 
             window.draw(nodeRect4);
-            window.draw(text);
+            window.draw(text8);
 
             current = current->next;
             index++;
@@ -154,9 +168,23 @@ public:
 
         window.draw(nodeRect2);
         window.draw(text);
+
+        sf::Text text3("> Least Recently Used (LRU) Node is located at the end (Immediately before the tail node)", font, 20);
+        sf::Text text4("> Most Recently Used Cache is always placed at start (Immediately after the Head node)", font, 20);
+
+        text3.setPosition(90, 550);
+        text4.setPosition(90, 600);
+
+
+        text3.setFillColor(sf::Color::White);
+        text4.setFillColor(sf::Color::White);
+        window.draw(text3);
+        window.draw(text4);
     }
 
+    // Add getters/setters or additional methods as needed
 };
+
 
 void inputThreadFunc(LinkedList& linkedList, int& curr_size)
 {
@@ -166,6 +194,8 @@ void inputThreadFunc(LinkedList& linkedList, int& curr_size)
         std::cout << "Enter a choice ('q' to quit): 1. Put   2. get" << std::endl;
         int ch;
         std::cin >> ch;
+
+        //std::cout << "Size :" << curr_size << std::endl;
 
         switch (ch)
         {
@@ -181,8 +211,9 @@ void inputThreadFunc(LinkedList& linkedList, int& curr_size)
             }
             else if (curr_size == 6)
             {
-                std::cout << "Size is full. Now it's time to remove least frequent." << std::endl;
+                std::cout << "Size is full. Now it's time to remove least recent used cache." << std::endl;
                 int tempkey = linkedList.traverseLastNode();
+                std::cout << "....................." << tempkey << " will be deleted." << std::endl;
                 linkedList.removeNode(tempkey);
             }
             else
