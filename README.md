@@ -20,6 +20,9 @@ This program demonstrates the visualization of an LRU (Least Recently Used) LFU 
 The program uses the SFML library to create a graphical window for cache visualization. It supports both LRU and LFU cache replacement policies.
 
 ### Least Recently Used (LRU) Cache:
+![LRU](https://github.com/ngandhi369/LRU-LFU-cache/assets/49865067/e2f5bfc1-51e2-422c-96dd-cf7eae468ea6)
+
+
 - The LRU cache replaces the least recently accessed items when the cache is full.
 - The cache uses queue algorithm techniques and is implemented as a doubly linked list, where each node represents a key-value pair.
 - The `LinkedList` class contains methods to add a node, remove a node, find a key, and draw the linked list on the SFML window.
@@ -27,6 +30,9 @@ The program uses the SFML library to create a graphical window for cache visuali
 - The cache visualization is updated in the main loop of the program using the SFML window.
 
 ### Least Frequently Used (LFU) Cache:
+
+![LFU](https://github.com/ngandhi369/LRU-LFU-cache/assets/49865067/56c30697-4a51-4c9e-8b0c-cc8058a946e7)
+
 - The LFU cache replaces the least frequently accessed items when the cache is full. If there are more than one cache having same frequency, then Least Recently Used (LRU) cache will be deleted.
 - The `LinkedList` class has been extended to support LFU cache functionality.
 - The cache nodes now store a frequency counter, and a separate method is provided to remove the least frequently used node when the cache is full.
